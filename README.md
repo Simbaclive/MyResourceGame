@@ -2,15 +2,19 @@
 
 This project focuses on designing and implementing a real-time 2D game environment from scratch to master the core principles of event-driven programming, architectural game loops, and dynamic state management. As a software engineer, the goal is to deepen technical proficiency in structural C# design patterns, memory allocation optimization, and programmatic visual rendering pipelines while working with robust multi-platform frameworks.
 
-The software is an arcade-style, top-down 2D resource gathering simulation. Players control a blue character entity navigating a structured grid landscape with the objective of securing gold resource ore nodes that spawn dynamically across random coordinates. When the player successfully collides with a node, the game logic instantly purges the resource from the active coordinate map, increments the player's secure inventory tracking state, and calculates a fresh, non-overlapping vector coordinate to deploy the next node. The user interface features an advanced Heads-Up Display (HUD) nested inside a translucent, styled container tray, showcasing a real-time sine-wave pulsing animation that visually scales the text over runtime intervals.
+The software is an arcade-style, top-down 2D survival and resource-gathering simulation. It features a localized finite state machine splitting the application into an initial username authentication phase and an active gameplay loop. Players input an alphanumeric pilot handle to clear the login state and enter a structured grid arena. In the arena, players control a blue character entity with the primary objective of collecting randomly spawning gold ore nodes while evading an autonomous crimson chaser entity. 
+
+When the player successfully collides with a resource node, the game engine updates the active state variables, increments the global score tracking system, and uses a random coordinate allocation algorithm to relocate the node. Collecting 30 Gold triggers a difficulty scaling mechanic that increments the game level and boosts the speed variables of the chaser entity. If the chaser intercepts the player, a system fail-state is triggered, resetting the session metrics back to Level 1. The user interface features an advanced multi-layered Heads-Up Display (HUD) nested inside a translucent, styled container tray, showcasing a real-time sine-wave pulsing animation that visually scales the score metrics over running clock cycles.
 
 ### How to Play
-* **Move Up/Down/Left/Right:** Use the keyboard **Arrow Keys** (or **WASD**).
-* **Objective:** Drive the blue player model directly into the gold squares to collect them.
-* **Collect Resources:** Each successful collision adds +10 Gold to your active inventory.
+* **Login Screen:** Type your player username using alphabetical keys and press **Enter** to initialize the game loop. Use **Backspace** to correct errors.
+* **Move Up/Down/Left/Right:** Use the keyboard **Arrow Keys** (or **WASD**) to drive the blue player entity.
+* **Objective:** Collect the gold squares while running away from the crimson enemy chaser block.
+* **Leveling Up:** Every 30 Gold collected advances the game to the next **Level** and permanently speeds up the enemy chaser.
+* **Fail State:** Getting caught by the crimson chaser resets your Level, current Gold, and Total Score back to baseline.
 * **Exit the Game:** Press the **Escape (Esc)** key at any point to close the application session gracefully.
 
-The purpose of developing this software is to engineering-test the end-to-end data pipelines involved in interactive user-input processing and real-time bounding-box collision matrix mapping (`Rectangle.Intersects`). Building this application provides practical mastery over the continuous execution lifecycle—specifically balancing deterministic input updates with hardware-independent frame rendering updates via game delta time tracking.
+The purpose of developing this software is to engineering-test the end-to-end data pipelines involved in interactive keyboard text buffering, real-time bounding-box collision matrix mapping (`Rectangle.Intersects`), and AI pathfinding trajectories. Building this application provides practical mastery over the continuous execution lifecycle—specifically balancing deterministic input state validation with hardware-independent frame rendering updates via game delta time tracking.
 
 [Software Demo Video](http://youtube.link.goes.here)
 
@@ -34,6 +38,6 @@ The software was architected and compiled inside a cross-platform workspace leve
 
 # Future Work
 
-* **Item 1:** Implement an autonomous enemy AI pathfinding system (such as an A* Algorithm) to chase the player and introduce a risk-management state loop.
+* **Item 1:** Upgrade the basic linear tracking vector of the enemy to an advanced grid-based pathfinding system (such as an A* Algorithm) to safely handle obstacle and wall navigation.
 * **Item 2:** Migrate from pure programmatic texture rendering to loading custom sprite sheets and custom pixel-art texture animations via the MonoGame Content Pipeline.
 * **Item 3:** Introduce a localized SQLite data-persistence layer or local JSON file storage mechanism to save and track the player's lifetime highest score records across execution sessions.
